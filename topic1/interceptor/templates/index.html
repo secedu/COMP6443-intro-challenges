@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Interceptor</title>
+    </head>
+
+    <body>
+        <h1>Welcome to COMP6[84]43!</h1>
+
+        <p>
+            Below is a HTML form. Submitting the form will cause a HTTP POST request to be executed.
+        </p>
+
+        <form method="post" action="/flag">
+            <label for="favcolour">Enter your favourite colour:</label>
+            <input type="text" name="favcolour">
+
+            <!-- It is possible to modify this field using inspect element, but for the purposes of this learning exercise try and use Burp Suite to modify the field as the request is being sent. -->
+            <input type="hidden" name="shouldgetflag" value="false">
+
+            <br>
+
+            <input type="submit">
+        </form>
+    </body>
+</html>

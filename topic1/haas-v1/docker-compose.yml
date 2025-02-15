@@ -1,0 +1,13 @@
+services:
+  haas:
+    build: haas
+    ports:
+      - 8000:8000
+    environment:
+      - HAAS_HOST=kb
+      - HAAS_PORT=5000
+      - HAAS_FLAG_PLACEHOLDER=FLAG{TEMPORARY_FLAG_TO_REPLACE} # This will be a different value on the actual server
+  kb:
+    build: kb
+    environment:
+      - HAAS_FLAG_PLACEHOLDER=FLAG{TEMPORARY_FLAG_TO_REPLACE} # This will be a different value on the actual server

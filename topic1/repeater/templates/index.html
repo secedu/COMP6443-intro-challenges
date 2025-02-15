@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Repeater</title>
+    </head>
+
+    <body>
+        <h1>Quoccacorp Bank</h1>
+
+        <p>
+            Your balance is ${{balance}}.<br>
+            You have an inventory of {{quoccas}} Quoccas.
+        </p>
+
+        {% if balance > 10 %}
+            <form action="buy" method="post">
+                <input type="submit" value="Buy Quocca (-$10, +1 quocca)">
+            </form>
+        {% else %}
+            <p style="color: red">Need $10 to purchase Quocca</p>
+        {% endif %}
+
+        {% if quoccas > 0 %}
+            <form action="sell" method="post">
+                <input type="submit" value="Sell Quocca (+$10, -1 quocca)">
+            </form>
+        {% else %}
+            <p style="color: red">Need a Quocca to sell Quocca</p>
+        {% endif %}
+
+        {% if balance > 300 %}
+            <form action="flag" method="post">
+                <input type="submit" value="Get flag (-$300)">
+            </form>
+        {% else %}
+            <p style="color: red">Need $300 to purchase flag</p>
+        {% endif %}
+
+        <script>
+            if (window.location.pathname != '/') {
+                window.location = '/';
+            }
+        </script>
+    </body>
+</html>
