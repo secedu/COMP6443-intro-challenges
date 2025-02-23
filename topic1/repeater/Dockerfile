@@ -9,4 +9,4 @@ COPY . ./
 
 EXPOSE 8000
 
-CMD ["gunicorn", "-c", "python:pyquocca.gunicorn", "app:app"]
+CMD ["gunicorn", "-c", "python:pyquocca.gunicorn", "-w", "1", "app:app"]

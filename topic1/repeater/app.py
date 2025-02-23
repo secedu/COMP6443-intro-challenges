@@ -1,48 +1,59 @@
 from flask import Flask, session, render_template
 from pyquocca import get_flag
 from pyquocca.logging import setup_dev_server_logging
+import secrets
 
 app = Flask(__name__)
 
 app.secret_key = "not_secure_because_this_is_an_intro_challenge"
 
-def init_session():
-    if not "balance" in session:
-        session["balance"] = 100
-        session["quoccas"] = 0
+balances = {}
 
-def display_page():
-    return render_template("index.html", balance=session["balance"], quoccas=session["quoccas"])
+def get_balance():
+    if not "uid" in session:
+        session["uid"] = secrets.token_hex(16)
+    
+    if not session["uid"] in balances:
+        balances[session["uid"]] = {
+            "balance": 100,
+            "quoccas": 0
+        }
+    
+    return balances[session["uid"]]
+    
+
+def display_page(balance):
+    return render_template("index.html", balance=balance["balance"], quoccas=balance["quoccas"])
 
 @app.route("/")
 def index():
-    init_session()
+    balance = get_balance()
 
-    return display_page()
+    return display_page(balance)
 
 @app.route("/buy", methods=["POST"])
 def buy():
-    init_session()
+    balance = get_balance()
 
-    session["quoccas"] += 1
-    session["balance"] -= 10
+    balance["quoccas"] += 1
+    balance["balance"] -= 10
 
-    return display_page()
+    return display_page(balance)
 
 @app.route("/sell", methods=["POST"])
 def sell():
-    init_session()
+    balance = get_balance()
 
-    session["quoccas"] -= 1
-    session["balance"] += 10
+    balance["quoccas"] -= 1
+    balance["balance"] += 10
 
-    return display_page()
+    return display_page(balance)
 
 @app.route("/flag", methods=["POST"])
 def flag():
-    init_session()
+    balance = get_balance()
 
-    if session["balance"] >= 300:
+    if balance["balance"] >= 300:
         return get_flag("repeater")
     else:
         return "Not enough funds! <a href='/'>Back</a>"
