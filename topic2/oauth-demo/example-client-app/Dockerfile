@@ -5,8 +5,6 @@ WORKDIR /app
 COPY requirements.txt .
 RUN pip install -r requirements.txt
 
-RUN echo v2 > ./version
-
 COPY . ./
 
 EXPOSE 8000

@@ -5,10 +5,8 @@ WORKDIR /app
 COPY requirements.txt .
 RUN pip install -r requirements.txt
 
-RUN echo v2 > ./version
-
 COPY . ./
 
-EXPOSE 8000
+EXPOSE 8001
 
-CMD ["gunicorn", "-c", "python:pyquocca.gunicorn", "app:app"]
+CMD ["gunicorn", "-c", "python:pyquocca.gunicorn", "-b", "0.0.0.0:8001", "app:app"]

@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+<form method="POST" action="/mfa">
+    {% if error %}
+    <p>{{error}}</p>
+    {% endif %}
+    <p>One-time Authenticator Code</p>
+    <input id="code" name="code" type="text" placeholder="XXXXXX">
+    <input type="submit" value="Submit">
+</form>
+{% endblock%}

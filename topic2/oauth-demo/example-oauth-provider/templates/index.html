@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+<p>
+    This is an example OAuth provider. The provider is the thing you sign in with. For example, if you pressed "Sign in with Google", then "Google" would be your OAuth provider.
+</p>
+
+<p>
+    The responsibility of the OAuth provider is to send back some information (in this case a <code>code</code>) to the OAuth app. The OAuth app will use this <code>code</code>
+    to associate the user's session with their OAuth provider account.
+</p>
+
+<p>
+    For example, if Google was the OAuth provider, and <a href="#">example.com</a> was the client application, <a href="#">example.com</a> might have a "Sign in with Google" login option. If the user presses it, they will be redirected to Google.<br>
+    Google will allow them to sign in and afterwards will give a <code>code</code> to <a href="#">example.com</a>. It does this by redirecting your browser to a URL on <a href="#">example.com</a>, for example <a href="#">https://example.com/callback?code=AUTH_CODE_HERE</a>.<br>
+    The browser landing on this URL will cause a HTTP GET request to the <a href="#">example.com</a> backend. The <a href="#">example.com</a> backend now has the <code>code</code> in the URL, which can be sent to Google servers in exchange for information about the user,
+    such as their name or email address.
+</p>
+
+<p>
+    For this example OAuth application, we are using <a href="{{ auth_provider_url }}">{{ auth_provider_url }}</a> as the OAuth provider and <a href="{{ client_app_url }}">{{ client_app_url }}</a> as the client app. Intercept the requests to see if you can understand how OAuth works!
+</p>
+{% endblock %}

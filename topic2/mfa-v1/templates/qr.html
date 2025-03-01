@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+
+{% block content %}
+<img
+    src="https://api.qrserver.com/v1/create-qr-code/?size=400x400&data=otpauth://totp/mfa-v1:{{username | safe}}?secret={{secret | safe}}">
+<p>You should scan this QR code to get your MFA information!</p>
+<a href="/" role="button">Continue to application...</a>
+{% endblock%}

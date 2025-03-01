@@ -40,3 +40,5 @@ def send():
 if __name__ == "__main__":
     setup_dev_server_logging()
     app.run(debug=True, host="0.0.0.0", port=8000)
+
+# This is haas-v2! No Docker cache, this is not haas v1!

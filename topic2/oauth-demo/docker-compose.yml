@@ -1,0 +1,28 @@
+services:
+  oauth_provider:
+    build: example-oauth-provider
+    ports:
+      - 8001:8001
+    environment:
+      AUTH_PROVIDER_PUBLIC_URL: http://localhost:8001
+      CLIENT_APP_PUBLIC_URL: http://localhost:8000
+      POSTGRES_HOST: db
+      POSTGRES_USER: postgres
+      POSTGRES_PASS: insecurepassword123
+      POSTGRES_DB: challengedb
+  client_app:
+    build: example-client-app
+    ports:
+      - 8000:8000
+    environment:
+      AUTH_PROVIDER_PUBLIC_URL: http://localhost:8001
+      CLIENT_APP_PUBLIC_URL: http://localhost:8000
+      AUTH_PROVIDER_BACKEND_URL: http://oauth_provider:8001
+  db:
+    image: postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: insecurepassword123
+      POSTGRES_DB: challengedb
+    volumes:
+      - ./initdb:/docker-entrypoint-initdb.d:ro

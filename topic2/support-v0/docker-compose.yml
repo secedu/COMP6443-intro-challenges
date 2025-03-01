@@ -1,0 +1,22 @@
+services:
+    main:
+        build: .
+        command: python3 app.py
+        volumes:
+            - ./app:/app
+        ports:
+            - "8000:8000"
+        environment:
+            - POSTGRES_HOST=postgres
+            - POSTGRES_USER=user
+            - POSTGRES_PASSWORD=verysecure
+            - POSTGRES_DB=challengedb
+
+    postgres:
+        image: postgres:17-alpine
+        environment:
+            - POSTGRES_USER=user
+            - POSTGRES_PASSWORD=verysecure
+            - POSTGRES_DB=challengedb
+        volumes:
+            - ./sqlimports:/docker-entrypoint-initdb.d
