@@ -1,9 +1,9 @@
 <?php
 
-$servername = $_ENV["MYSQL_DB_HOST"];
-$username = $_ENV["MYSQL_DB_USER"];
-$password = $_ENV["MYSQL_DB_PASS"];
-$dbname = $_ENV["MYSQL_DB_DB"];
+$servername = $_ENV["MYSQL_HOST"];
+$username = $_ENV["MYSQL_USER"];
+$password = $_ENV["MYSQL_PASS"];
+$dbname = $_ENV["MYSQL_DB"];
 
 try {
   $conn = new PDO("mysql:host=$servername;dbname=$dbname;charset=utf8mb4", $username, $password);
