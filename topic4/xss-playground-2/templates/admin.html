@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+<p>Here at QuoccaCorp, we value the safety of our users. If you find a malicious paste, submit the URL here and the <strong>admin will open the page</strong> and look at it.</p>
+<p>It's not like the admin has a flag in their browser's cookie or anything...</p>
+
+<article>Enter a URL like https://blah.quoccacorp.com/blah</article>
+
+<form action="/report" method="post">
+    <input name="url">
+    <input type="submit">
+</form>
+{% endblock%}

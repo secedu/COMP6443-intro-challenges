@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+<p>Please enter your name below:</p>
+
+<article>IMPORTANT NOTE: due to security concerns we have moved the SECRET NOTE TAKING APP to a seperate website. You can view it by going here: <a href="{{api_caller_domain}}">{{api_caller_domain}}</a></article>
+
+<form method="get" action="/">
+    <textarea name="name"></textarea>
+    <input type="submit">
+</form>
+{% endblock%}
