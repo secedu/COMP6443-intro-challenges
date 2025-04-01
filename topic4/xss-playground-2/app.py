@@ -4,7 +4,7 @@ from pyquocca.logging import setup_dev_server_logging
 
 from pyquocca.postgres import FlaskPostgres
 
-from pyquocca.xssbot import visit
+from pyquocca.xssbot import visit, BadRequestError
 
 import uuid
 
@@ -42,9 +42,11 @@ def report():
         visit(
             request.form.get("url"), [{"name": "flag", "value": get_flag("xss-playground-2"), "domain": "xss-playground-2.quoccacorp.com"}]
         )
+    except BadRequestError:
+        return "The URL was invalid.", 400
     except Exception as e:
         print(e)
-        return "An unexpected error occurred."
+        return "An unexpected error occurred.", 500
     return "Successfully reported the page! An admin should visit shortly."
 
 if __name__ == "__main__":
