@@ -4,7 +4,7 @@ from pyquocca.logging import setup_dev_server_logging
 
 import os
 
-from pyquocca.xssbot import visit
+from pyquocca.xssbot import visit, BadRequestError
 
 app = Flask(__name__)
 
@@ -24,9 +24,11 @@ def report():
         visit(
             request.form.get("url"), [{"name": "note", "value": get_flag("cors-playground"), "domain": "cors-api.quoccacorp.com"}]
         )
+    except BadRequestError:
+        return "The URL was invalid.", 400
     except Exception as e:
         print(e)
-        return "An unexpected error occurred."
+        return "An unexpected error occurred.", 500
     return "Successfully reported the page! An admin should visit shortly."
 
 if __name__ == "__main__":
