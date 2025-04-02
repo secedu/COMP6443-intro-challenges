@@ -22,7 +22,13 @@ def admin():
 def report():
     try:
         visit(
-            request.form.get("url"), [{"name": "note", "value": get_flag("cors-playground"), "domain": "cors-api.quoccacorp.com"}]
+            request.form.get("url"), [{"name": "note", "value": get_flag("cors-playground"), "domain": "cors-api.quoccacorp.com"}], options={
+                "mtlsDomains": [
+                    "cors-api.quoccacorp.com",
+                    "cors-xss.quoccacorp.com",
+                    "cors-api-caller.quoccacorp.com"
+                ]
+            }
         )
     except BadRequestError:
         return "The URL was invalid.", 400
