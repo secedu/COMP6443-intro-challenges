@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Historian</title>
+    </head>
+
+    <body>
+        <h1>Quoccacorp Bank</h1>
+        
+        <p>
+            Hmm. I wonder if there were any spicy requests sent...
+        </p>
+
+        <script>
+            const TARGETS = [
+                'bd514501cdd5ba52bdf32ce7d801797a59f47542cf1f55f61d3a31a3517979aa',
+                '371a15dcefbb4ba7632e9ed139a8839f7c04e8506787f29cf73a40786bbcec47',
+                'b20d920fc6aa9091c1773da01ad0c96530ceb19e430aab1704d4ecd735d9dec6',
+                '938c2a3dfa19c1a46821bed04912db62f9fdb134737804213cd67099482dc640',
+                '7a901aaf8e0075d0a53cb3ca67215a83f9f4a11a9c36a20a62925093333da8a1',
+                '85d73c3eeecb595c6a77e4ddc58fcc9b7ad3b6ec2b4a4f00c841dfaeb44d980f'
+            ];
+
+            const main = async () => {
+                for (const p of TARGETS) {
+                    await fetch(`/${p}`);
+                }
+            }
+
+            main();
+        </script>
+    </body>
+</html>

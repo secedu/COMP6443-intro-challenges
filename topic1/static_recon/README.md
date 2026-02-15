@@ -1,0 +1,2 @@
+# Static Recon
+We're not providing the source code for this challenge - you need to answer the questions/find the flags yourself. A good resource for this challenge is https://the-pentesting-guide.marmeus.com/web/information_disclosure
