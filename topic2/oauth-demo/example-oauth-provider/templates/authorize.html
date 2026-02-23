@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+
+{% block content %}
+<p>
+    Refer to the <a href="/">index page</a> for information on how OAuth works.
+</p>
+
+<p>
+    You are currently undergoing an OAuth login!
+
+    <code id="dbg">
+
+    </code>
+
+    <div id="paramsvalid">
+        <p>Please log in to this site:</p>
+        
+        <p>Enter username:</p>
+        <input id="username">
+        <button id="loginbtn" onclick="login()">Login with username (pretend you entered password too)</button>
+        
+        <button id="authorizebtn" style="display: none" onclick="authorize()"></button>
+    </div>
+    <div id="paramsnotvalid">
+        <p>Please fix the parameters to make them valid.</p>
+    </div>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const responseType = urlParams.get('response_type');
+        const clientId = urlParams.get('client_id');
+        const redirectUri = urlParams.get('redirect_uri');
+        const scope = urlParams.get('scope');
+        const state = urlParams.get('state');
+
+        const log = (x) => {
+            const el = document.createElement('span');
+            el.innerText = x;
+            dbg.appendChild(el);
+            dbg.appendChild(document.createElement('br'));
+            dbg.appendChild(document.createElement('br'));
+        }
+
+        log(`The response type the client app is ${responseType}. ${
+            responseType === 'code' ?
+            'Code means the OAuth provider will return a code that can be exchanged for a token which can retrieve information about the user.'
+            : 'This app is simple and doesn\'t support this responseType!'
+        }`);
+
+        log(`The client id is ${clientId}. ${
+            clientId === '1337' ?
+            'The OAuth provider checks it\'s database and knows that client 1337 is the example oauth app!'
+            : 'This client id is not recognised.'
+        }`);
+
+        log(`The redirect uri is ${redirectUri}. This is the URL that the authorization code will be sent to.`)
+
+        log(`The scope is "${scope}" and indicates the permissions that the provider is granting the client application.`);
+
+        log(`State (current value ${state}) is for preventing CSRF attacks which we will learn about in later weeks.`);
+
+        if (responseType === 'code' && clientId === '1337') {
+            paramsnotvalid.style.display = 'none';
+        } else {
+            paramsvalid.style.display = 'none';
+        }
+    </script>
+        
+    <script>
+        function login() {
+            if (username.value === "admin") {
+                alert('You cannot login as admin! >:)');
+                username.value = "";
+                return;
+            }
+
+            username.disabled = true;
+
+            // In a real app, the username and password would be checked here.
+            // We will just pretend the login was successful.
+
+            authorizebtn.innerText = "You are now logged in as user " + username.value + ". Press here to authorize the client app";
+            authorizebtn.style.display = 'block';
+
+            loginbtn.style.display = 'none';
+        }
+
+        async function authorize() {
+            const authCode = await (await fetch('/code?user=' + encodeURIComponent(username.value))).text();
+
+            location.href = `${redirectUri}?code=${authCode}`;
+        }
+    </script>
+</p>
+{% endblock %}

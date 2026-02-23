@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Login</h1>
+
+<a href="{{ auth_provider_url }}/authorize?response_type=code&client_id=1337&redirect_uri={{ client_app_url }}/callback&scope=none&state=1234">Sign in with <span style="text-decoration: line-through;">Google</span> Example Auth Provider</button>
+{% endblock%}

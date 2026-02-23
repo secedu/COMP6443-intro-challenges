@@ -1,0 +1,40 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<style>
+.demo-card-wide.mdl-card {
+  width: 512px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 30px;
+}
+.demo-card-wide > .mdl-card__title {
+  color: #fff;
+  height: 176px;
+  background: url('/static/images/welcome_card.jpg') center / cover;
+}
+.demo-card-wide > .mdl-card__menu {
+  color: #fff;
+}
+</style>
+
+<div class="demo-card-wide mdl-card mdl-shadow--2dp">
+  <div class="mdl-card__title">
+    <h2 class="mdl-card__title-text">Welcome</h2>
+  </div>
+  <div class="mdl-card__supporting-text">
+    Hello {{ g.username }} (Support Customer ID {{ g.user_id }})
+  </div>
+  <div class="mdl-card__actions mdl-card--border">
+    <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" href="/new">
+      New Ticket
+    </a>
+  </div>
+  <div class="mdl-card__menu">
+    <a class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" href="/raw/6fbRN72">
+      <i class="material-icons">help</i>
+    </button>
+  </div>
+</div>
+
+{% endblock %}
