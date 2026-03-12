@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+<p>This page allows you to generate your own emails!</p>
+
+{% raw %}
+<form method="post" action="/">
+    <textarea name="content" style="height: 300px;">Hello {{name}},
+
+I am happy to inform you that your application to Quoccacorp was successful! More information will be coming soon.
+
+Regards, {{author}}</textarea>
+{% endraw %}
+
+    <br>
+
+    <p>
+        Name:
+        <input name="name">
+    </p>
+
+    <p>
+        Author:
+        <input name="author">
+    </p>
+
+    <input type="submit">
+</form>
+{% endblock%}
