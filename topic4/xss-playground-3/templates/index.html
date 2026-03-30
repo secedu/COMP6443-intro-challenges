@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+<p>Enter your notes here, they will be kept safe. They are never sent to the server, only stored client side.</p>
+
+<article>Important: Changes are only saved when you click outside the text area</article>
+<article>Also important: Tutors should go through why &lt;script&gt; does NOT work here</article>
+
+<textarea id="notesedit"></textarea>
+
+<code id="notesrendered"></code>
+
+<script>
+const notesEdit = document.getElementById("notesedit");
+const notesRendered = document.getElementById("notesrendered");
+
+notesEdit.addEventListener("change", () => {
+    notesRendered.innerHTML = notesEdit.value;
+    window.location.hash = "#" + encodeURIComponent(notesEdit.value);
+});
+
+window.addEventListener("load", () => {
+    const data = decodeURIComponent(window.location.hash.substring(1));
+    notesRendered.innerHTML = data;
+    notesEdit.value = data;
+})
+</script>
+
+{% endblock%}

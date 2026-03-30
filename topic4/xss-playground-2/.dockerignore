@@ -1,0 +1,5 @@
+.dockerignore
+chal.yml
+docker-compose.yml
+Dockerfile
+SOLUTION.md

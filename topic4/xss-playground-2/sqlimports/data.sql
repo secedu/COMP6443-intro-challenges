@@ -1,0 +1,4 @@
+CREATE TABLE pastes (
+    id VARCHAR(100) PRIMARY KEY,
+    data VARCHAR(2048)
+)
